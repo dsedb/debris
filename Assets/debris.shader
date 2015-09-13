@@ -27,12 +27,13 @@
  			};
  			
  			float4x4 _PrevInvMatrix;
+			float3   _TargetPosition;
 			float    _Range;
 			float    _RangeR;
    
             v2f vert(appdata_custom v)
             {
-				float3 target = _WorldSpaceCameraPos;
+				float3 target = _TargetPosition;
 				float3 trip;
 				trip = floor( ((target - v.vertex.xyz)*_RangeR + 1) * 0.5 );
 				trip *= (_Range * 2);
@@ -48,7 +49,7 @@
             	
             	v2f o;
             	o.pos = tv0 + tv1;
-            	float depth = o.pos.z * 0.02;
+            	float depth = o.pos.z * 0.0;
             	float normalized_depth = (1 - depth);
             	o.color = v.color;
             	o.color.a *= (normalized_depth);

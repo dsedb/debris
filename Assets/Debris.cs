@@ -57,10 +57,12 @@ public class Debris : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		var target_position = Camera.main.transform.TransformPoint(Vector3.forward * range_);
 		var matrix = prev_view_matrix_ * Camera.main.cameraToWorldMatrix; // prev-view * inverted-cur-view
 		var mr = GetComponent<Renderer> ();
 		mr.material.SetFloat ("_Range", range_);
 		mr.material.SetFloat ("_RangeR", rangeR_);
+		mr.material.SetVector ("_TargetPosition", target_position);
 		mr.material.SetMatrix ("_PrevInvMatrix", matrix);
 		prev_view_matrix_ = Camera.main.worldToCameraMatrix;
 	}
